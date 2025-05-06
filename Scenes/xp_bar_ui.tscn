@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7lho88ac27jp"]
+
+[ext_resource type="Script" uid="uid://xopwifanlueu" path="res://Scripts/xp_bar_handler.gd" id="1_bw2rt"]
+[ext_resource type="FontFile" uid="uid://b3a4aqrgrxxf8" path="res://Assets/fonts/PixelOperator8.ttf" id="1_gek4i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bw2rt"]
+bg_color = Color(0.0235294, 0.054902, 0.101961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.278431, 0.458824, 0.509804, 1)
+shadow_size = 12
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjnnq"]
+bg_color = Color(0.278431, 0.458824, 0.509804, 1)
+
+[node name="Xp_Bar_UI" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bw2rt")
+
+[node name="Xp Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -570.0
+offset_top = 6.0
+offset_right = 570.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_gek4i")
+theme_override_styles/background = SubResource("StyleBoxFlat_bw2rt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xjnnq")

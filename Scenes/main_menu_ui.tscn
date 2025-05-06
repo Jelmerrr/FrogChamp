@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnpgcyyx12uni"]
+
+[ext_resource type="Script" uid="uid://b52c1uqnvlt6u" path="res://Scripts/main_menu_handler.gd" id="1_q4h2x"]
+[ext_resource type="Theme" uid="uid://dl8jpjtlugjva" path="res://Assets/Themes/Custom_Button_theme.tres" id="1_ugr05"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4h2x"]
+bg_color = Color(0.0235294, 0.054902, 0.101961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.278431, 0.458824, 0.509804, 1)
+shadow_size = 12
+shadow_offset = Vector2(0, 5)
+
+[node name="Menu_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q4h2x")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -209.0
+offset_right = 200.0
+offset_bottom = 209.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4h2x")
+
+[node name="Start_Game" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ugr05")
+text = "Let's Frogging go"
+
+[node name="Upgrades" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -25.0
+offset_right = 125.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ugr05")
+text = "Upgrades"
+
+[node name="Quit_Game" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 75.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ugr05")
+text = "It's Frover"
+
+[connection signal="pressed" from="Panel/Start_Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Panel/Upgrades" to="." method="_on_upgrades_pressed"]
+[connection signal="pressed" from="Panel/Quit_Game" to="." method="_on_quit_game_pressed"]

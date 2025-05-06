@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://d6f6s5y4odd5"]
+
+[ext_resource type="Script" uid="uid://btkj5hl8c2oxf" path="res://Scripts/victory_ui_handler.gd" id="1_3tgfi"]
+[ext_resource type="FontFile" uid="uid://b3a4aqrgrxxf8" path="res://Assets/fonts/PixelOperator8.ttf" id="2_vkug5"]
+[ext_resource type="Texture2D" uid="uid://dnodhenjm7hhk" path="res://Assets/Sprites/firefox_n0S2dRW1to.png" id="3_3tgfi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vec04"]
+bg_color = Color(0.0235294, 0.054902, 0.101961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.278431, 0.458824, 0.509804, 1)
+shadow_size = 12
+shadow_offset = Vector2(0, 5)
+
+[node name="Victory" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3tgfi")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vec04")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -138.0
+offset_top = 12.0
+offset_right = 138.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_vkug5")
+theme_override_font_sizes/font_size = 32
+text = "FrogChamp"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -120.5
+offset_right = 143.0
+offset_bottom = 190.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3tgfi")
+expand_mode = 1
+
+[node name="restart_timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="restart_timer" to="." method="_on_restart_timer_timeout"]

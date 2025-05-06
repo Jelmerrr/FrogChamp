@@ -1,0 +1,53 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="FrogChamp"
+run/main_scene="uid://b74a3vwucq0jq"
+config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/image="uid://1ndhyix2rklb"
+config/icon="uid://1ndhyix2rklb"
+
+[autoload]
+
+EventBus="*res://Scripts/Preload/Event_Bus.gd"
+UpgradeLibrary="*res://Scripts/Preload/upgrade_library.gd"
+RngHandler="*res://Scripts/Preload/rng_handler.gd"
+PlayerstatLibrary="*res://Scripts/Preload/playerstat_library.gd"
+SceneHandler="*res://Scripts/Preload/scene_handler.gd"
+MetaprogressionHandler="*res://Scripts/Preload/metaprogression_handler.gd"
+SaveGameHandler="*res://Scripts/Preload/SaveGame_Handler.gd"
+
+[display]
+
+window/size/mode=2
+window/size/resizable=false
+mouse_cursor/custom_image="uid://buikhaepm30m7"
+mouse_cursor/custom_image_hotspot=Vector2(32, 32)
+
+[dotnet]
+
+project/assembly_name="FrogChamp"
+
+[layer_names]
+
+2d_render/layer_1="Player"
+2d_render/layer_2="Player_Projectiles"
+2d_render/layer_3="Enemy"
+2d_render/layer_4="Enemy_Projectiles"
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Player_Projectiles"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Enemy_Projectiles"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

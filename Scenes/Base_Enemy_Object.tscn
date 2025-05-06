@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://s0dov3dqvckw"]
+
+[ext_resource type="Script" uid="uid://dosdjyf7y8x0f" path="res://Scripts/base_enemy_object_handler.gd" id="1_k1xgn"]
+[ext_resource type="Texture2D" uid="uid://cptb10npbwuhf" path="res://Assets/Sprites/Dragonfly.png" id="2_k1xgn"]
+[ext_resource type="FontFile" uid="uid://b3a4aqrgrxxf8" path="res://Assets/fonts/PixelOperator8.ttf" id="3_cq10x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cq10x"]
+bg_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+border_color = Color(0.835294, 0.235294, 0.415686, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 16
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnteu"]
+bg_color = Color(0.835294, 0.235294, 0.415686, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cq10x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k1xgn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1xgn"]
+size = Vector2(22, 16)
+
+[node name="Enemy" type="CharacterBody2D"]
+z_index = 2
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_k1xgn")
+
+[node name="Health_Bar" type="ProgressBar" parent="."]
+z_index = 5
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 20.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_cq10x")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_cq10x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pnteu")
+show_percentage = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cq10x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k1xgn")

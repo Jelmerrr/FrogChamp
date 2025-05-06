@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=4 uid="uid://d1ixen50227ro"]
+
+[ext_resource type="Script" uid="uid://dxbhcte1axohc" path="res://Scripts/game_manager.gd" id="1_amc4v"]
+[ext_resource type="PackedScene" uid="uid://bjl0lgkoqrigy" path="res://Scenes/Player_Object.tscn" id="2_adljv"]
+[ext_resource type="PackedScene" uid="uid://dc04yugoiovm5" path="res://Scenes/game_over_ui.tscn" id="2_amc4v"]
+[ext_resource type="PackedScene" uid="uid://c7lho88ac27jp" path="res://Scenes/xp_bar_ui.tscn" id="3_ycouc"]
+[ext_resource type="PackedScene" uid="uid://d6f6s5y4odd5" path="res://Scenes/victory_ui.tscn" id="4_0djkk"]
+[ext_resource type="PackedScene" uid="uid://djmmgsvbm8bxv" path="res://Scenes/upgrade_ui.tscn" id="4_xy0kc"]
+[ext_resource type="PackedScene" uid="uid://ncnl4jparnuf" path="res://Scenes/timer_ui.tscn" id="5_n4uuv"]
+[ext_resource type="Texture2D" uid="uid://crixhb5epahfo" path="res://Assets/Sprites/Backgroundsprite.png" id="6_5cxhx"]
+[ext_resource type="AudioStream" uid="uid://rpxpjynn1sqw" path="res://Assets/Audio/HelloIAmUnderTheWater rev 2.mp3" id="7_ae06s"]
+
+[sub_resource type="Curve2D" id="Curve2D_amc4v"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 300, 180, 0, 0, 0, 0, -300, 180, 0, 0, 0, 0, -300, -180, 0, 0, 0, 0, 300, -180, 0, 0, 0, 0, 300, 180)
+}
+point_count = 5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ae06s"]
+texture = ExtResource("6_5cxhx")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_n4uuv"]
+sources/0 = SubResource("TileSetAtlasSource_ae06s")
+
+[node name="Game_Space" type="Node2D"]
+script = ExtResource("1_amc4v")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="xp_bar" parent="Camera2D/CanvasLayer" instance=ExtResource("3_ycouc")]
+
+[node name="Game_over" parent="Camera2D/CanvasLayer" instance=ExtResource("2_amc4v")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Victory" parent="Camera2D/CanvasLayer" instance=ExtResource("4_0djkk")]
+visible = false
+
+[node name="Timer_ui" parent="Camera2D/CanvasLayer" instance=ExtResource("5_n4uuv")]
+
+[node name="Upgrade_ui" parent="Camera2D/CanvasLayer" instance=ExtResource("4_xy0kc")]
+visible = false
+
+[node name="Frog" parent="." instance=ExtResource("2_adljv")]
+
+[node name="SpawnIncreaseTimer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_amc4v")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(300, 180)
+rotation = 3.14159
+
+[node name="Marker2D" type="Marker2D" parent="Path2D/PathFollow2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AADv/wgAAAAAAAAAAADz/wgAAAAAAAAAAAD3/wgAAAAAAAAAAAD7/wgAAAAAAAAAAAD//wgAAAAAAAAAAAADAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAALAAgAAAAAAAAAAAAPAAgAAAAAAAAAAAATAAgAAAAAAAAAAADv/wQAAAAAAAAAAADz/wQAAAAAAAAAAAD3/wQAAAAAAAAAAAD7/wQAAAAAAAAAAAD//wQAAAAAAAAAAAADAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAATAAQAAAAAAAAAAADv/wAAAAAAAAAAAADv//z/AAAAAAAAAADv//j/AAAAAAAAAADv//T/AAAAAAAAAADz//T/AAAAAAAAAADz//j/AAAAAAAAAADz//z/AAAAAAAAAADz/wAAAAAAAAAAAAD3//T/AAAAAAAAAAD3//j/AAAAAAAAAAD3//z/AAAAAAAAAAD3/wAAAAAAAAAAAAD7/wAAAAAAAAAAAAD7//z/AAAAAAAAAAD7//j/AAAAAAAAAAD7//T/AAAAAAAAAAD///T/AAAAAAAAAAD///j/AAAAAAAAAAD///z/AAAAAAAAAAD//wAAAAAAAAAAAAADAAAAAAAAAAAAAAADAPz/AAAAAAAAAAADAPj/AAAAAAAAAAADAPT/AAAAAAAAAAAHAPT/AAAAAAAAAAAHAPj/AAAAAAAAAAAHAPz/AAAAAAAAAAAHAAAAAAAAAAAAAAALAPT/AAAAAAAAAAAPAPT/AAAAAAAAAAATAPT/AAAAAAAAAAATAPj/AAAAAAAAAAAPAPj/AAAAAAAAAAALAPj/AAAAAAAAAAALAPz/AAAAAAAAAAAPAPz/AAAAAAAAAAATAPz/AAAAAAAAAAATAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAALAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_n4uuv")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ae06s")
+volume_db = -16.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="timeout" from="SpawnIncreaseTimer" to="." method="_on_spawn_increase_timer_timeout"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
