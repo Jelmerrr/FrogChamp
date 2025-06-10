@@ -12,6 +12,9 @@ extends Control
 @onready var upgrade_3_description: Label = $"Upgrade 3/Upgrade 3 description"
 @onready var upgrade_3_sprite: TextureRect = $"Upgrade 3/Upgrade 3 Sprite"
 
+@onready var paused_rect: ColorRect = %PausedRect
+
+
 var available_upgrades = []
 
 var upgrade1ID
@@ -37,6 +40,7 @@ func initialize_upgrades():
 	generate_upgrade2()
 	generate_upgrade3()
 	visible = true
+	paused_rect.visible = true
 	Engine.time_scale = 0
 
 func select_upgrade():
@@ -67,14 +71,17 @@ func generate_upgrade3():
 func _on_select_upgrade_1_pressed() -> void:
 	EventBus.on_selected_upgrade.emit(upgrade1ID)
 	visible = false
+	paused_rect.visible = false
 	Engine.time_scale = 1
 
 func _on_select_upgrade_2_pressed() -> void:
 	EventBus.on_selected_upgrade.emit(upgrade2ID)
 	visible = false
+	paused_rect.visible = false
 	Engine.time_scale = 1
 
 func _on_select_upgrade_3_pressed() -> void:
 	EventBus.on_selected_upgrade.emit(upgrade3ID)
 	visible = false
+	paused_rect.visible = false
 	Engine.time_scale = 1

@@ -1,14 +1,37 @@
-[gd_scene load_steps=13 format=4 uid="uid://d1ixen50227ro"]
+[gd_scene load_steps=17 format=4 uid="uid://d1ixen50227ro"]
 
 [ext_resource type="Script" uid="uid://dxbhcte1axohc" path="res://Scripts/game_manager.gd" id="1_amc4v"]
 [ext_resource type="PackedScene" uid="uid://bjl0lgkoqrigy" path="res://Scenes/Player_Object.tscn" id="2_adljv"]
 [ext_resource type="PackedScene" uid="uid://dc04yugoiovm5" path="res://Scenes/game_over_ui.tscn" id="2_amc4v"]
+[ext_resource type="Shader" uid="uid://bt8ajuilgixj6" path="res://Shaders/CRT_Shader.gdshader" id="2_jk2kp"]
+[ext_resource type="Shader" uid="uid://f5ufdxa3k7pi" path="res://Shaders/Screen_Paused.gdshader" id="3_tgf8l"]
 [ext_resource type="PackedScene" uid="uid://c7lho88ac27jp" path="res://Scenes/xp_bar_ui.tscn" id="3_ycouc"]
 [ext_resource type="PackedScene" uid="uid://d6f6s5y4odd5" path="res://Scenes/victory_ui.tscn" id="4_0djkk"]
 [ext_resource type="PackedScene" uid="uid://djmmgsvbm8bxv" path="res://Scenes/upgrade_ui.tscn" id="4_xy0kc"]
 [ext_resource type="PackedScene" uid="uid://ncnl4jparnuf" path="res://Scenes/timer_ui.tscn" id="5_n4uuv"]
 [ext_resource type="Texture2D" uid="uid://crixhb5epahfo" path="res://Assets/Sprites/Backgroundsprite.png" id="6_5cxhx"]
 [ext_resource type="AudioStream" uid="uid://rpxpjynn1sqw" path="res://Assets/Audio/HelloIAmUnderTheWater rev 2.mp3" id="7_ae06s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mggbd"]
+shader = ExtResource("3_tgf8l")
+shader_parameter/resolution = Vector2(1152, 648)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jk2kp"]
+shader = ExtResource("2_jk2kp")
+shader_parameter/resolution = Vector2(1152, 648)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.0
+shader_parameter/noise_amount = 0.017
+shader_parameter/interference_amount = 1.0
+shader_parameter/grille_amount = 0.0
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.0
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/aberation_amount = 0.6
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = -8.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
 
 [sub_resource type="Curve2D" id="Curve2D_amc4v"]
 _data = {
@@ -32,9 +55,29 @@ zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D/CanvasLayer"]
+
+[node name="PausedRect" type="ColorRect" parent="Camera2D/CanvasLayer/CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+z_index = 1000
+material = SubResource("ShaderMaterial_mggbd")
+offset_right = 1152.0
+offset_bottom = 648.0
+
 [node name="xp_bar" parent="Camera2D/CanvasLayer" instance=ExtResource("3_ycouc")]
 
-[node name="Game_over" parent="Camera2D/CanvasLayer" instance=ExtResource("2_amc4v")]
+[node name="Timer_ui" parent="Camera2D/CanvasLayer" instance=ExtResource("5_n4uuv")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Camera2D/CanvasLayer"]
+
+[node name="VHSRect" type="ColorRect" parent="Camera2D/CanvasLayer/CanvasLayer2"]
+z_index = 1000
+material = SubResource("ShaderMaterial_jk2kp")
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Game_over" parent="Camera2D/CanvasLayer/CanvasLayer2" instance=ExtResource("2_amc4v")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,12 +85,10 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="Victory" parent="Camera2D/CanvasLayer" instance=ExtResource("4_0djkk")]
+[node name="Victory" parent="Camera2D/CanvasLayer/CanvasLayer2" instance=ExtResource("4_0djkk")]
 visible = false
 
-[node name="Timer_ui" parent="Camera2D/CanvasLayer" instance=ExtResource("5_n4uuv")]
-
-[node name="Upgrade_ui" parent="Camera2D/CanvasLayer" instance=ExtResource("4_xy0kc")]
+[node name="Upgrade_ui" parent="Camera2D/CanvasLayer/CanvasLayer2" instance=ExtResource("4_xy0kc")]
 visible = false
 
 [node name="Frog" parent="." instance=ExtResource("2_adljv")]

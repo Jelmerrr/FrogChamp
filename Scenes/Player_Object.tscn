@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjl0lgkoqrigy"]
 
 [ext_resource type="Script" uid="uid://cg1yusov0cuaf" path="res://Scripts/player_controller.gd" id="1_qus2v"]
-[ext_resource type="Texture2D" uid="uid://1ndhyix2rklb" path="res://Assets/Sprites/Player Sprites/FrogSprite1.png" id="2_qus2v"]
+[ext_resource type="Texture2D" uid="uid://dpbuj8yxr5vgn" path="res://Assets/Sprites/Player Sprites/PlayerFrog1.png" id="2_qus2v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_67v81"]
 animations = [{
@@ -25,13 +25,10 @@ script = ExtResource("1_qus2v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_67v81")
 autoplay = "default"
+frame_progress = 0.121923
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_or1cs")
-
-[node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -40,5 +37,29 @@ collision_mask = 12
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_or1cs")
 
-[connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]
+[node name="Attack Timers" type="Node" parent="."]
+
+[node name="Mud Bomb Timer" type="Timer" parent="Attack Timers"]
+wait_time = 0.5
+
+[node name="Acid Flask Timer" type="Timer" parent="Attack Timers"]
+wait_time = 3.0
+
+[node name="Flamethrower Timer" type="Timer" parent="Attack Timers"]
+wait_time = 2.5
+one_shot = true
+
+[node name="Spawn Flames Timer" type="Timer" parent="Attack Timers/Flamethrower Timer"]
+wait_time = 0.1
+autostart = true
+
+[node name="Flames Duration Timer" type="Timer" parent="Attack Timers/Flamethrower Timer"]
+wait_time = 2.5
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Attack Timers/Mud Bomb Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Attack Timers/Acid Flask Timer" to="." method="_on_acid_flask_timer_timeout"]
+[connection signal="timeout" from="Attack Timers/Flamethrower Timer" to="." method="_on_flamethrower_timer_timeout"]
+[connection signal="timeout" from="Attack Timers/Flamethrower Timer/Spawn Flames Timer" to="." method="_on_spawn_flames_timer_timeout"]
+[connection signal="timeout" from="Attack Timers/Flamethrower Timer/Flames Duration Timer" to="." method="_on_flames_duration_timer_timeout"]

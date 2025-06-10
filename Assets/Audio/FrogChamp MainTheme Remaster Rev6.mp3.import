@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://buxy0b0yvubcf"
+path="res://.godot/imported/FrogChamp MainTheme Remaster Rev6.mp3-f135a89e9facd2206245301c2a696cf5.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/FrogChamp MainTheme Remaster Rev6.mp3"
+dest_files=["res://.godot/imported/FrogChamp MainTheme Remaster Rev6.mp3-f135a89e9facd2206245301c2a696cf5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

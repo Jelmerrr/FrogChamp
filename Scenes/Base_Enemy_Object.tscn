@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://s0dov3dqvckw"]
+[gd_scene load_steps=10 format=3 uid="uid://s0dov3dqvckw"]
 
 [ext_resource type="Script" uid="uid://dosdjyf7y8x0f" path="res://Scripts/base_enemy_object_handler.gd" id="1_k1xgn"]
 [ext_resource type="Texture2D" uid="uid://cptb10npbwuhf" path="res://Assets/Sprites/Dragonfly.png" id="2_k1xgn"]
 [ext_resource type="FontFile" uid="uid://b3a4aqrgrxxf8" path="res://Assets/fonts/PixelOperator8.ttf" id="3_cq10x"]
+[ext_resource type="Shader" uid="uid://boavg0e5bp2to" path="res://Shaders/Damage_Flash.gdshader" id="3_pnteu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cq10x"]
 bg_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
@@ -21,6 +22,12 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 anti_aliasing = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a6mmc"]
+resource_local_to_scene = true
+shader = ExtResource("3_pnteu")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cq10x"]
 animations = [{
@@ -59,7 +66,13 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_pnteu")
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_a6mmc")
 sprite_frames = SubResource("SpriteFrames_cq10x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_k1xgn")
+
+[node name="Damage timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="Damage timer" to="." method="_on_damage_timer_timeout"]

@@ -9,6 +9,9 @@ var upgradesDict = {
 	"BulletSpeed": {"ID": 1, "Available": true, "Type": upgradeTypes.Item, "Name": "BulletSpeed", "Description": "Increases bullet speed"},
 	"Damage": {"ID": 2, "Available": true, "Type": upgradeTypes.Item, "Name": "Damage", "Description": "Increases damage"},
 	"MudBomb": {"ID": 3, "Available": true, "Type": upgradeTypes.Weapon, "Name": "Mud Bomb", "Description": "Splosssjjj"},
+	"AcidFlask": {"ID": 4, "Available": true, "Type": upgradeTypes.Weapon, "Name": "Acid Flask", "Description": "Hello, Potion Seller, I am going into battle and I want your strongest potions."},
+	"Flamethrower": {"ID": 5, "Available": true, "Type": upgradeTypes.Weapon, "Name": "Flamethrower", "Description": "Hanz"},
+	"Duration": {"ID": 6, "Available": true, "Type": upgradeTypes.Item, "Name": "Duration", "Description": "Increases duration (non-functional atm)"},
 }
 
 func _ready() -> void:

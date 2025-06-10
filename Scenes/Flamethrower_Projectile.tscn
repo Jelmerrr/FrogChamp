@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://byduc1iy1ajar"]
+
+[ext_resource type="Script" uid="uid://bdtr2rvam7xl4" path="res://Scripts/flamethrower_handler.gd" id="1_0lao1"]
+[ext_resource type="Texture2D" uid="uid://deaxj63p4q4ml" path="res://Assets/Sprites/FlameSprite.png" id="1_nfh5o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0lao1"]
+radius = 17.0
+height = 60.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+script = ExtResource("1_0lao1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(0, -54)
+texture = ExtResource("1_nfh5o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -48)
+shape = SubResource("CapsuleShape2D_0lao1")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -48)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_0lao1")
+
+[node name="Life Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Damage Tick Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Life Timer" to="." method="_on_life_timer_timeout"]
+[connection signal="timeout" from="Damage Tick Timer" to="." method="_on_damage_tick_timer_timeout"]

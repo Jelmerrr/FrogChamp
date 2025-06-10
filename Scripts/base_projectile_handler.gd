@@ -4,7 +4,8 @@ var dir : float
 var spawnPos : Vector2
 var spawnRot : float
 var zdex : int
-var projectile_damage : int
+var projectile_damage : int = 15
+var bullet_speed : int = 250
 
 func _ready():
 	global_position = spawnPos
@@ -13,7 +14,7 @@ func _ready():
 
 func _physics_process(_delta: float) -> void:
 	scale = Vector2(PlayerstatLibrary.projectilescale, PlayerstatLibrary.projectilescale) 
-	velocity = Vector2(0, -PlayerstatLibrary.bulletspeed).rotated(dir)
+	velocity = Vector2(0, -bullet_speed).rotated(dir)
 	move_and_slide()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
