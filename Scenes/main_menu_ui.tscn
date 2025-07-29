@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnpgcyyx12uni"]
+[gd_scene load_steps=5 format=3 uid="uid://dnpgcyyx12uni"]
 
 [ext_resource type="Script" uid="uid://b52c1uqnvlt6u" path="res://Scripts/main_menu_handler.gd" id="1_q4h2x"]
 [ext_resource type="Theme" uid="uid://dl8jpjtlugjva" path="res://Assets/Themes/Custom_Button_theme.tres" id="1_ugr05"]
+[ext_resource type="FontFile" uid="uid://b3a4aqrgrxxf8" path="res://Assets/fonts/PixelOperator8.ttf" id="3_m1gix"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4h2x"]
 bg_color = Color(0.0235294, 0.054902, 0.101961, 1)
@@ -84,6 +85,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ugr05")
 text = "It's Frover"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -99.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_m1gix")
+text = "V.0.2.1"
 
 [connection signal="pressed" from="Panel/Start_Game" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="Panel/Upgrades" to="." method="_on_upgrades_pressed"]

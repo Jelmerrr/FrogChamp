@@ -1,6 +1,7 @@
 extends Control
 
 @onready var xp_bar: ProgressBar = $"Xp Bar"
+@onready var label: Label = $"Xp Bar/Label"
 
 var level = 1
 
@@ -14,7 +15,8 @@ func _process(_delta: float) -> void:
 		xp_bar.value = 0
 		level += 1
 		EventBus.on_level_up.emit(level)
-		xp_bar.max_value = 100 * pow(level, 1.8) #+ pow(2 * level, 3.14)
+		xp_bar.max_value = 100 * pow(level, 1.6) #+ pow(2 * level, 3.14)
+		label.text = "Level " + str(level)
 
 func Update_Xp(_xp):
 	xp_bar.value += _xp * MetaprogressionHandler.get_modifier("xpmodifier")

@@ -16,9 +16,9 @@ var acidFlaskSizePerLevel = [15, 20, 25, 30, 50]
 
 var flamethrowerProjectilePerLevel = [1, 1, 3, 3, 5]
 
-var mudBombActive = false
+var mudBombActive = true
 var acidFlaskActive = false
-var flamethrowerActive = true
+var flamethrowerActive = false
 
 func _ready() -> void:
 	Initialize_Values()
